@@ -9,6 +9,7 @@ import (
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha1"
+	"crypto/sha256"
 	"crypto/sha512"
 	"encoding/base64"
 	"errors"
@@ -19,7 +20,6 @@ import (
 	pb "github.com/libp2p/go-libp2p-crypto/pb"
 
 	"github.com/gogo/protobuf/proto"
-	sha256 "github.com/minio/sha256-simd"
 )
 
 const (
@@ -290,7 +290,8 @@ func UnmarshalPublicKey(data []byte) (PubKey, error) {
 // public key
 func MarshalPublicKey(k PubKey) ([]byte, error) {
 	pbmes := new(pb.PublicKey)
-	pbmes.Type = k.Type()
+	t := k.Type()
+	pbmes.Type = &t
 	data, err := k.Raw()
 	if err != nil {
 		return nil, err
@@ -320,7 +321,8 @@ func UnmarshalPrivateKey(data []byte) (PrivKey, error) {
 // MarshalPrivateKey converts a key object into its protobuf serialized form.
 func MarshalPrivateKey(k PrivKey) ([]byte, error) {
 	pbmes := new(pb.PrivateKey)
-	pbmes.Type = k.Type()
+	t := k.Type()
+	pbmes.Type = &t
 	data, err := k.Raw()
 	if err != nil {
 		return nil, err

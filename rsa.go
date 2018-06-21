@@ -4,13 +4,12 @@ import (
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
+	"crypto/sha256"
 	"crypto/x509"
 	"errors"
 	"io"
 
 	pb "github.com/libp2p/go-libp2p-crypto/pb"
-
-	sha256 "github.com/minio/sha256-simd"
 )
 
 // ErrRsaKeyTooSmall is returned when trying to generate or parse an RSA key
