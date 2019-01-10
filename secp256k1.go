@@ -1,13 +1,13 @@
 package crypto
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"io"
 
 	pb "github.com/libp2p/go-libp2p-crypto/pb"
 
 	btcec "github.com/btcsuite/btcd/btcec"
-	sha256 "github.com/minio/sha256-simd"
 )
 
 // Secp256k1PrivateKey is an Secp256k1 private key
